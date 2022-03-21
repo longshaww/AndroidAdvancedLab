@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "53620139713",
+    "project_id": "ttl-thlab",
+    "storage_bucket": "ttl-thlab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53620139713:android:13e353d986647794481640",
+        "android_client_info": {
+          "package_name": "vn.edu.huflit.ttl_19dh110248"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53620139713-n2bstrojnotjvjn209kqpikrdl1bivuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMP_JUn8w-3nXFTPj9MFNSRjXCE9-_Cdk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53620139713-n2bstrojnotjvjn209kqpikrdl1bivuv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
