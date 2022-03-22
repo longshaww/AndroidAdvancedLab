@@ -94,7 +94,7 @@ public class FullNameFragment extends Fragment {
                 errors.add("Please enter your first name");
             }
             if (TextUtils.isEmpty(lastName)) {
-                errors.add("Please enter your phone last name");
+                errors.add("Please enter your last name");
             }
             if (errors.size() > 0) {
                 for (int i = 0; i < errors.size(); i++) {

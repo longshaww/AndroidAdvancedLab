@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,9 +19,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     public Button btnSignIn, btnSignUp;
+    public TextView errorTextLogin;
     public TextInputEditText usernameInput, passwordInput;
 
     //    @Override
@@ -45,7 +50,7 @@ public class SignInActivity extends AppCompatActivity {
         btnSignUp = findViewById(R.id.btnSignUup);
         usernameInput = findViewById(R.id.username_input);
         passwordInput = findViewById(R.id.password_input);
-
+        errorTextLogin = findViewById(R.id.errorTextLogin);
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,13 +68,19 @@ public class SignInActivity extends AppCompatActivity {
     private void userSignIn() {
         String username = usernameInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
-        if (TextUtils.isEmpty(username)) {
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
-            return;
-        }
 
+        List<String> errors = new ArrayList<String>();
+        if (TextUtils.isEmpty(username)) {
+            errors.add("Please enter your username");
+        }
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
+            errors.add("Please enter your password");
+        }
+        if (errors.size() > 0) {
+            for (int i = 0; i < errors.size(); i++) {
+                String content = errors.get(0) + "\n" + errors.get(1);
+                errorTextLogin.setText(content);
+            }
             return;
         }
 

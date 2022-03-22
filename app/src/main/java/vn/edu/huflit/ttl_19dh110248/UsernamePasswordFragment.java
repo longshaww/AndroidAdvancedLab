@@ -45,6 +45,10 @@ public class UsernamePasswordFragment extends Fragment {
     FirebaseDatabase fDatabase;
     public String userID, content;
 
+    public static boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -94,6 +98,7 @@ public class UsernamePasswordFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_username_password, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -114,7 +119,7 @@ public class UsernamePasswordFragment extends Fragment {
             String email = tvEmail.getText().toString().trim();
             String password = tvPassword.getText().toString().trim();
             List<String> errors = new ArrayList<String>();
-            if (TextUtils.isEmpty(email) && email.matches(emailPattern)) {
+            if (!isValidEmail(email)) {
                 errors.add("Please check your email");
             }
             if (TextUtils.isEmpty(password)) {
