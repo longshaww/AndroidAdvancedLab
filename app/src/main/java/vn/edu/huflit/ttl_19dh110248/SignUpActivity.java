@@ -27,6 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
                 .build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(toolbar, navController);
+
     }
 }
 

@@ -8,12 +8,17 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +28,7 @@ import com.google.android.material.textfield.TextInputEditText;
 public class FullNameFragment extends Fragment {
     TextInputEditText tvFirstName, tvLastName;
     Button btnNext;
+    TextView errorTextFullName;
     NavController navController;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -77,11 +83,28 @@ public class FullNameFragment extends Fragment {
         navController = Navigation.findNavController(view);
         tvFirstName = view.findViewById(R.id.tvFirstName);
         tvLastName = view.findViewById(R.id.tvLastName);
+        errorTextFullName = view.findViewById(R.id.errorTextFullName);
         btnNext = view.findViewById(R.id.btnNext);
         btnNext.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putString("firstname", tvFirstName.getText().toString());
-            bundle.putString("lastname", tvLastName.getText().toString());
+            String firstName = tvFirstName.getText().toString().trim();
+            String lastName = tvLastName.getText().toString().trim();
+            List<String> errors = new ArrayList<String>();
+            if (TextUtils.isEmpty(firstName)) {
+                errors.add("Please enter your first name");
+            }
+            if (TextUtils.isEmpty(lastName)) {
+                errors.add("Please enter your phone last name");
+            }
+            if (errors.size() > 0) {
+                for (int i = 0; i < errors.size(); i++) {
+                    String content = errors.get(0) + "\n" + errors.get(1);
+                    errorTextFullName.setText(content);
+                }
+                return;
+            }
+            bundle.putString("firstname", firstName);
+            bundle.putString("lastname", lastName);
             navController.navigate(R.id.action_fullNameFragment_to_addressFragment, bundle);
 
         });

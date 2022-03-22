@@ -8,10 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +27,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,10 +39,11 @@ import java.util.Map;
  */
 public class UsernamePasswordFragment extends Fragment {
     TextInputEditText tvEmail, tvPassword, tvConfirmPassword;
+    TextView errorTextUsernamePassword;
     Button btnRegister;
     FirebaseAuth fAuth;
     FirebaseDatabase fDatabase;
-    String userID;
+    public String userID, content;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,6 +53,8 @@ public class UsernamePasswordFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    public static String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     public UsernamePasswordFragment() {
         // Required empty public constructor
@@ -92,21 +100,34 @@ public class UsernamePasswordFragment extends Fragment {
 
         fAuth = FirebaseAuth.getInstance();
         fDatabase = FirebaseDatabase.getInstance();
-
+        errorTextUsernamePassword = view.findViewById(R.id.errorTextUsernamePassword);
         tvEmail = view.findViewById(R.id.tvEmail);
         tvPassword = view.findViewById(R.id.tvPassword);
         btnRegister = view.findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(v -> {
-
-
             String address = getArguments().getString("address");
             String firstname = getArguments().getString("firstname");
             String lastname = getArguments().getString("lastname");
             double latitude = getArguments().getDouble("latitude");
             double longitude = getArguments().getDouble("longitude");
             String mobile = getArguments().getString("mobile");
-            String email = tvEmail.getText().toString();
-            String password = tvPassword.getText().toString();
+            String email = tvEmail.getText().toString().trim();
+            String password = tvPassword.getText().toString().trim();
+            List<String> errors = new ArrayList<String>();
+            if (TextUtils.isEmpty(email) && email.matches(emailPattern)) {
+                errors.add("Please check your email");
+            }
+            if (TextUtils.isEmpty(password)) {
+                errors.add("Please enter your password");
+            }
+
+            if (errors.size() > 0) {
+                for (int i = 0; i < errors.size(); i++) {
+                    content = errors.get(0) + "\n" + errors.get(1);
+                    errorTextUsernamePassword.setText(content);
+                }
+                return;
+            }
 
             fAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -133,6 +154,7 @@ public class UsernamePasswordFragment extends Fragment {
                                                 intent.putExtra("email", email);
                                                 getActivity().setResult(Activity.RESULT_OK, intent);
                                                 getActivity().finish();
+                                                startActivity(intent);
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
@@ -156,5 +178,6 @@ public class UsernamePasswordFragment extends Fragment {
 
         });
     }
+
 }
 

@@ -10,12 +10,19 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +31,7 @@ import com.google.android.material.textfield.TextInputEditText;
  */
 public class AddressFragment extends Fragment {
     TextInputEditText tvAddress, tvMobile;
+    TextView errorText;
     Button btnNext;
     NavController navController;
 
@@ -81,14 +89,34 @@ public class AddressFragment extends Fragment {
         navController = Navigation.findNavController(view);
         tvAddress = view.findViewById(R.id.tvAddress);
         tvMobile = view.findViewById(R.id.tvMobile);
+        errorText = view.findViewById(R.id.errorTextAddress);
         btnNext = view.findViewById(R.id.btnNext);
         btnNext.setOnClickListener(v -> {
 //            LatLng latLng = LocationServiceTask.getLatLngFromAddress(getContext(), tvAddress.getText().toString());
             Bundle bundle = new Bundle();
-            bundle.putString("address", tvAddress.getText().toString());
+            String address = tvAddress.getText().toString().trim();
+            String mobile = tvMobile.getText().toString().trim();
+            List<String> errors = new ArrayList<String>();
+            if (TextUtils.isEmpty(address)) {
+                errors.add("Please enter address");
+            }
+            if (TextUtils.isEmpty(mobile)) {
+                errors.add("Please enter your phone number");
+            }
+
+            if (errors.size() > 0) {
+                for (int i = 0; i < errors.size(); i++) {
+                   String content = errors.get(0) + "\n" + errors.get(1);
+                   errorText.setText(content);
+
+                }
+                return;
+            }
+
+            bundle.putString("address", address);
 //            bundle.putDouble("latitude", latLng.latitude);
 //            bundle.putDouble("longitude", latLng.longitude);
-            bundle.putString("mobile", tvMobile.getText().toString());
+            bundle.putString("mobile", mobile);
             bundle.putString("firstname", getArguments().getString("firstname"));
             bundle.putString("lastname", getArguments().getString("lastname"));
 
