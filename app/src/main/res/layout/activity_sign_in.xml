@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInActivity">
-
+    tools:context=".SignIn">
     <TextView
-        android:id="@+id/android_app_text"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        android:fontFamily="More Fonts..."
+        android:fontFamily="@font/roboto_black"
         android:text="@string/app_name"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/xxxLargeFontSize"
@@ -28,10 +27,10 @@
         android:text="@string/text_instant_food_delivery"
         android:textColor="@color/colorAccent"
         android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/android_app_text"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/android_app_text"
-        app:layout_constraintTop_toBottomOf="@+id/android_app_text" />
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/username"
@@ -50,7 +49,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username_input"
             android:layout_width="match_parent"
             android:fontFamily="@font/roboto_bold"
             android:layout_height="match_parent" />
@@ -75,22 +73,11 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password_input"
             android:layout_width="match_parent"
             android:fontFamily="@font/roboto_bold"
             android:layout_height="match_parent"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/errorTextLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorRed"
-        android:textSize="15dp"
-        android:layout_marginLeft="15dp"
-        app:layout_constraintStart_toStartOf="@+id/password"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <TextView
         android:id="@+id/textView4"
@@ -110,7 +97,7 @@
         android:id="@+id/btnSignIn"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/bg_green_corner_button"
         android:text="Sign in"
         android:textColor="@color/white"
@@ -119,7 +106,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSignUup"
+        android:id="@+id/btnSignUp"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -195,4 +182,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.ProgressBar.Large.Inverse"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

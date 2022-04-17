@@ -2,29 +2,26 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_signin"
-    app:startDestination="@id/fullNameFragment">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
     <fragment
-        android:id="@+id/fullNameFragment"
-        android:name="vn.edu.huflit.ttl_19dh110248.FullNameFragment"
-        android:label="fragment_full_name"
-        tools:layout="@layout/fragment_full_name" >
-        <action
-            android:id="@+id/action_fullNameFragment_to_addressFragment"
-            app:destination="@id/addressFragment" />
-    </fragment>
+        android:id="@+id/homeFragment"
+        android:name="vn.edu.huflit.ttl_19dh110248.fragment.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/addressFragment"
-        android:name="vn.edu.huflit.ttl_19dh110248.AddressFragment"
-        android:label="fragment_address"
-        tools:layout="@layout/fragment_address" >
-        <action
-            android:id="@+id/action_addressFragment_to_usernamePasswordFragment"
-            app:destination="@id/usernamePasswordFragment" />
-    </fragment>
+        android:id="@+id/orderFragment"
+        android:name="vn.edu.huflit.ttl_19dh110248.fragment.OrderFragment"
+        android:label="Order"
+        tools:layout="@layout/fragment_order" />
     <fragment
-        android:id="@+id/usernamePasswordFragment"
-        android:name="vn.edu.huflit.ttl_19dh110248.UsernamePasswordFragment"
-        android:label="fragment_username_password"
-        tools:layout="@layout/fragment_username_password" />
+        android:id="@+id/profileFragment"
+        android:name="vn.edu.huflit.ttl_19dh110248.fragment.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+    <dialog
+        android:id="@+id/logOutFragment"
+        android:name="vn.edu.huflit.ttl_19dh110248.fragment.LogOutFragment"
+        tools:layout="@layout/fragment_log_out" />
 </navigation>
