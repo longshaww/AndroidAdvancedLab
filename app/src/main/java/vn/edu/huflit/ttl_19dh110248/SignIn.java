@@ -34,7 +34,7 @@ public class SignIn extends AppCompatActivity {
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SignIn.this, vn.edu.huflit.ttl_19dh110248.SignUP.class);
+                Intent intent=new Intent(SignIn.this, signUp.class);
                 startActivity(intent);
             }
         });
@@ -49,11 +49,11 @@ public class SignIn extends AppCompatActivity {
                     Snackbar.make(v,"Vui lòng nhập đầy đủ thông tin!",Snackbar.LENGTH_LONG).show();
                     return;
                 }
-                progressBar.setVisibility(View.VISIBLE);
+//                progressBar.setVisibility(View.VISIBLE);
                 firebaseAuth.signInWithEmailAndPassword(Email,Pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressBar.setVisibility(View.GONE);
+//                        progressBar.setVisibility(View.GONE);
                         if(!task.isSuccessful()){
                             Snackbar.make(v,"Quá trình đăng nhập đã thất bại.",Snackbar.LENGTH_LONG).show();
                             return;

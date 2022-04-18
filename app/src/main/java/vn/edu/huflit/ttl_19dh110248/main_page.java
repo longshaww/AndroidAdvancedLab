@@ -64,7 +64,7 @@ public class main_page extends AppCompatActivity{
                 .addOnSuccessListener(dataSnapshot -> {
                     Users user = dataSnapshot.getValue(Users.class);
                     user.setUserID(userID);
-                    tvFullName.setText(user.getFirstName()+' '+user.getLastName());
+                    tvFullName.setText(user.getLastName()+' '+user.getFirstName());
                     tvEmail.setText(user.getEmail());
 
                 });

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +31,8 @@ import vn.edu.huflit.ttl_19dh110248.models.Users;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
-    EditText fullnameChange, emailChange, phoneChange, addressChange;
+    EditText fullnameChange, phoneChange;
+    TextView emailChange,addressChange;
     Button btnUpdate;
     FirebaseDatabase fDatabase;
     FirebaseAuth fAuth;
@@ -97,7 +99,7 @@ public class ProfileFragment extends Fragment {
         fDatabase.getReference().child("users").child(userID).get().addOnSuccessListener(dataSnapshot -> {
             Users user = dataSnapshot.getValue(Users.class);
             user.setUserID(userID);
-            fullnameChange.setText(user.getFirstName()+' '+user.getLastName());
+            fullnameChange.setText(user.getLastName()+' '+user.getFirstName());
             emailChange.setText(user.getEmail());
             phoneChange.setText(user.getPhone());
             addressChange.setText(user.getAddress());
@@ -113,19 +115,19 @@ public class ProfileFragment extends Fragment {
             else{
                 firstName = fullName;
             }
-            String email=emailChange.getText().toString();
+//            String email=emailChange.getText().toString();
             String phone=phoneChange.getText().toString();
-            String address=addressChange.getText().toString();
+//            String address=addressChange.getText().toString();
 
-            LatLng latLng = LocationServiceTask.getLatLngFromAddress(getContext(), address.toString());
+//            LatLng latLng = LocationServiceTask.getLatLngFromAddress(getContext(), address.toString());
             HashMap<String, Object> newData = new HashMap<>();
             newData.put("firstname",firstName);
             newData.put("lastname",lastName);
-            newData.put("email",email);
+//            newData.put("email",email);
             newData.put("phone",phone);
-            newData.put("address",address);
-            newData.put("latitude",latLng.latitude);
-            newData.put("longitude",latLng.longitude);
+//            newData.put("address",address);
+//            newData.put("latitude",latLng.latitude);
+//            newData.put("longitude",latLng.longitude);
 
 
             databaseReference=fDatabase.getReference("users");
@@ -133,9 +135,9 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     fullnameChange.setText(fullName);
-                    emailChange.setText(email);
+//                    emailChange.setText(email);
                     phoneChange.setText(phone);
-                    addressChange.setText(address);
+//                    addressChange.setText(address);
                 }
             });
         });
