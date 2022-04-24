@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import vn.edu.huflit.ttl_19dh110248.R;
-import vn.edu.huflit.ttl_19dh110248.activity_restaurant_detail;
+import vn.edu.huflit.ttl_19dh110248.RestaurantDetailActivity;
 import vn.edu.huflit.ttl_19dh110248.adapter.RestaurantAdapter;
 import vn.edu.huflit.ttl_19dh110248.models.Restaurant;
 
@@ -120,7 +120,10 @@ public class RestaurantFragment extends Fragment implements RestaurantAdapter.Li
 
     @Override
     public void onClick(Restaurant restaurantItem) {
-        Intent intent=new Intent(getContext(), activity_restaurant_detail.class);
+        Bundle bundle = new Bundle();
+        Intent intent = new Intent(getContext(), RestaurantDetailActivity.class);
+        bundle.putSerializable("restaurant",restaurantItem);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

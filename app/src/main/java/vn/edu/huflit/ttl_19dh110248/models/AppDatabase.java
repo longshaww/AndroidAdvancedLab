@@ -9,10 +9,12 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database( entities = {vn.edu.huflit.ttl_19dh110248.models.Cart.class}, version = 1)
+@Database( entities = {Cart.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
+    //    public static  AbstractExecutorService databaseWriteExecutor;
     private static AppDatabase INSTANCE;
-    public abstract vn.edu.huflit.ttl_19dh110248.models.CartDao cartDao();
+    public abstract CartDao cartDao();
+
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(1);
 

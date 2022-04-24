@@ -1,21 +1,41 @@
 package vn.edu.huflit.ttl_19dh110248.fragment;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import vn.edu.huflit.ttl_19dh110248.R;
+import vn.edu.huflit.ttl_19dh110248.adapter.OrderAdapter;
+import vn.edu.huflit.ttl_19dh110248.models.OrderFinished;
+import vn.edu.huflit.ttl_19dh110248.models.Restaurant;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link OrderFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OrderFragment extends Fragment {
-
+public class OrderFragment extends Fragment implements OrderAdapter.OnOrderItemListener {
+    ArrayList<Restaurant> restaurants;
+    FirebaseDatabase fDatabase;
+    OrderAdapter orderAdapter;
+    ArrayList<OrderFinished> orderFinisheds;
+    RecyclerView rvOrderFinished;
+    DatabaseReference reference;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -57,9 +77,58 @@ public class OrderFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order, container, false);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        fDatabase = FirebaseDatabase.getInstance();
+        reference = fDatabase.getReference();
+
+        rvOrderFinished = view.findViewById(R.id.rvOrderFinished);
+        orderAdapter = new OrderAdapter(orderFinisheds, restaurants, this);
+        rvOrderFinished.setAdapter(orderAdapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        rvOrderFinished.setLayoutManager(layoutManager);
+        rvOrderFinished.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+
+        reference.child("orders").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                orderFinisheds.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    OrderFinished orderFinished = dataSnapshot.getValue(OrderFinished.class);
+                    orderFinisheds.add(orderFinished);
+                    Log.i("ABC", "onDataChange: " + orderFinisheds.get(0).getFoodBaskets().size());
+                }
+                orderAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        reference.child("restaurants").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                restaurants.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Restaurant restaurant = dataSnapshot.getValue(Restaurant.class);
+                    restaurants.add(restaurant);
+
+                }
+                orderAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onOrderItemListener(OrderFinished orderFinished) {
+
     }
 }

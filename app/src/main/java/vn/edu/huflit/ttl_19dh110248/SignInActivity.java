@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SignIn extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
     Button SignUp,SignIn;
     TextInputLayout userName,password;
     FirebaseAuth firebaseAuth;
@@ -34,7 +34,7 @@ public class SignIn extends AppCompatActivity {
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SignIn.this, signUp.class);
+                Intent intent=new Intent(SignInActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -59,7 +59,7 @@ public class SignIn extends AppCompatActivity {
                             return;
                         }
                         else {
-                            Intent intent=new Intent(SignIn.this, vn.edu.huflit.ttl_19dh110248.main_page.class);
+                            Intent intent=new Intent(SignInActivity.this, vn.edu.huflit.ttl_19dh110248.main_page.class);
                             startActivity(intent);
                             finish();
                         }
@@ -68,4 +68,10 @@ public class SignIn extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
 }

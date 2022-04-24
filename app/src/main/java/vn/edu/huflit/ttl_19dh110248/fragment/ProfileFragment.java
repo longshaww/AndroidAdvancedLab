@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,8 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 import vn.edu.huflit.ttl_19dh110248.R;
-import vn.edu.huflit.ttl_19dh110248.locationSearvice.LocationServiceTask;
-import vn.edu.huflit.ttl_19dh110248.models.Users;
+import vn.edu.huflit.ttl_19dh110248.models.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,7 +95,7 @@ public class ProfileFragment extends Fragment {
         addressChange = view.findViewById(R.id.address_profile);
         String userID = fAuth.getCurrentUser().getUid();
         fDatabase.getReference().child("users").child(userID).get().addOnSuccessListener(dataSnapshot -> {
-            Users user = dataSnapshot.getValue(Users.class);
+            User user = dataSnapshot.getValue(User.class);
             user.setUserID(userID);
             fullnameChange.setText(user.getLastName()+' '+user.getFirstName());
             emailChange.setText(user.getEmail());

@@ -18,7 +18,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-import vn.edu.huflit.ttl_19dh110248.models.Users;
+import vn.edu.huflit.ttl_19dh110248.models.User;
 
 public class main_page extends AppCompatActivity{
     NavController navController;
@@ -62,7 +62,7 @@ public class main_page extends AppCompatActivity{
 
         fDatabase.getReference().child("users").child(userID).get()
                 .addOnSuccessListener(dataSnapshot -> {
-                    Users user = dataSnapshot.getValue(Users.class);
+                    User user = dataSnapshot.getValue(User.class);
                     user.setUserID(userID);
                     tvFullName.setText(user.getLastName()+' '+user.getFirstName());
                     tvEmail.setText(user.getEmail());

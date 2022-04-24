@@ -9,7 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class signUp extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     Toolbar toolbar;
     NavController navController;
     AppBarConfiguration appBarConfiguration;

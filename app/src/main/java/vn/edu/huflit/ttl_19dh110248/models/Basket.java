@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class Basket implements Serializable {
-    public HashMap<String, vn.edu.huflit.ttl_19dh110248.models.FoodBasket> foods;
+    public HashMap<String, FoodBasket> foods;
     public double totalPrice;
     public int totalItem;
 
@@ -15,18 +15,18 @@ public class Basket implements Serializable {
     }
 
 
-    public void addFood(vn.edu.huflit.ttl_19dh110248.models.FoodBasket food) {
+    public void addFood(FoodBasket food) {
         foods.put(food.getFoodKey(), food);
     }
 
-    public vn.edu.huflit.ttl_19dh110248.models.FoodBasket getFood(String key) {
+    public FoodBasket getFood(String key) {
         return foods.get(key);
     }
 
     public void calculateBasket() {
         totalPrice = 0;
         totalItem = 0;
-        for (vn.edu.huflit.ttl_19dh110248.models.FoodBasket foodBasket : foods.values()) {
+        for (FoodBasket foodBasket : foods.values()) {
             totalPrice += (foodBasket.price * foodBasket.quantity);
             totalItem += foodBasket.quantity;
         }

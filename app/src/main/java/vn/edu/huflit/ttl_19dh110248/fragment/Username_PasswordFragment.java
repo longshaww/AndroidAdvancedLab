@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import vn.edu.huflit.ttl_19dh110248.R;
-import vn.edu.huflit.ttl_19dh110248.SignIn;
+import vn.edu.huflit.ttl_19dh110248.SignInActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -144,7 +144,7 @@ public class Username_PasswordFragment extends Fragment {
                     databaseReference.child("users").child(userID).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            Intent intent=new Intent(view.getContext(), SignIn.class);
+                            Intent intent=new Intent(view.getContext(), SignInActivity.class);
                             intent.putExtra("email",Email);
                             startActivity(intent);
                         }

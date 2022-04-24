@@ -3,18 +3,18 @@ package vn.edu.huflit.ttl_19dh110248.models;
 import java.util.List;
 
 public class OrderFinished {
-    String orderID;
-    String orderDate;
-    String orderSum;
+    public String orderID;
+    public String orderDate;
+    public String orderSum;
     int orderStatus;
     String userUID;
-    List<vn.edu.huflit.ttl_19dh110248.models.FoodBasket> foodBaskets;
+    List<FoodBasket> foodBaskets;
 
 
     public OrderFinished() {
     }
 
-    public OrderFinished(String orderID, String orderDate, String orderSum, int orderStatus, String userUID, List<vn.edu.huflit.ttl_19dh110248.models.FoodBasket> foodBaskets) {
+    public OrderFinished(String orderID, String orderDate, String orderSum, int orderStatus, String userUID, List<FoodBasket> foodBaskets) {
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.orderSum = orderSum;
@@ -71,4 +71,3 @@ public class OrderFinished {
         this.foodBaskets = foodBaskets;
     }
 }
-

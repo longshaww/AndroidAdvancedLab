@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import vn.edu.huflit.ttl_19dh110248.R;
-import vn.edu.huflit.ttl_19dh110248.SignIn;
+import vn.edu.huflit.ttl_19dh110248.SignInActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,7 +82,7 @@ public class LogOutFragment extends DialogFragment {
             if(firebaseAuth.getCurrentUser()!=null){
                 firebaseAuth.signOut();
                 getActivity().finish();
-                Intent intent=new Intent(getActivity(),SignIn.class);
+                Intent intent=new Intent(getActivity(), SignInActivity.class);
                 getActivity().startActivity(intent);
             }
         });

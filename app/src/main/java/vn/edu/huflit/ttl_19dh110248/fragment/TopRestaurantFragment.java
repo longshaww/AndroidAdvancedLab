@@ -1,6 +1,5 @@
 package vn.edu.huflit.ttl_19dh110248.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import vn.edu.huflit.ttl_19dh110248.R;
-import vn.edu.huflit.ttl_19dh110248.activity_restaurant_detail;
 import vn.edu.huflit.ttl_19dh110248.adapter.RestaurantAdapter;
 import vn.edu.huflit.ttl_19dh110248.models.Restaurant;
 
@@ -125,7 +123,7 @@ public class TopRestaurantFragment extends Fragment implements RestaurantAdapter
 
     @Override
     public void onClick(Restaurant restaurantItem) {
-        Intent intent=new Intent(getContext(), activity_restaurant_detail.class);
-        startActivity(intent);
+//        Intent intent=new Intent(getContext(), RestaurantDetailActivity.class);
+//        startActivity(intent);
     }
 }

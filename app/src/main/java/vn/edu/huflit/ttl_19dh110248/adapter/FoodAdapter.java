@@ -22,12 +22,17 @@ import vn.edu.huflit.ttl_19dh110248.R;
 import vn.edu.huflit.ttl_19dh110248.models.Food;
 
 public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-
-    public FoodAdapter(ArrayList<Food> foods) {
-        this.mfoods = foods;
-    }
-
     private ArrayList<Food> mfoods;
+    private OnFoodItemClickListener foodItemClickListener;
+
+    public interface OnFoodItemClickListener {
+        void onFoodItemClick(Food food);
+    }
+    public FoodAdapter(ArrayList<Food> foods,OnFoodItemClickListener foodItemClickListener) {
+        this.mfoods = foods;
+        this.foodItemClickListener = foodItemClickListener;
+
+    }
 
 
     @NonNull
@@ -54,6 +59,12 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         viewHolderFood.tvNameFood.setText(food.getName());
         viewHolderFood.tvRateFood.setText("Rate: ".concat(String.valueOf(food.rate)));
         viewHolderFood.tvPriceFood.setText("Price: ".concat(String.valueOf(food.price)));
+        viewHolderFood.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                foodItemClickListener.onFoodItemClick(food);
+            }
+        });
     }
 
     @Override
@@ -72,4 +83,5 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ivImageFood = view.findViewById(R.id.ivImageFood);
         }
     }
+
 }
