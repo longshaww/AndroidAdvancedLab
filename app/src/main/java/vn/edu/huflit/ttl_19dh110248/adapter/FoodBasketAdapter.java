@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import vn.edu.huflit.ttl_19dh110248.R;
 import vn.edu.huflit.ttl_19dh110248.models.FoodBasket;
@@ -33,12 +32,12 @@ public class FoodBasketAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             super(itemView);
             nameFood = itemView.findViewById(R.id.nameFood);
             qty = itemView.findViewById(R.id.qty);
-            priceFood = itemView.findViewById(R.id.priceFood);
+            priceFood = itemView.findViewById(R.id.price);
             intoMoney = itemView.findViewById(R.id.intoMoney);
         }
     }
 
-    private List<FoodBasket> foodBaskets;
+    //    private ArrayList<FoodBasket> foodBaskets;
     private OnFoodBasketItemClickListener onFoodBasketItemClickListener;
 
     @NonNull
@@ -53,19 +52,25 @@ public class FoodBasketAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        FoodBasket foodBasket = foodBaskets.get(position);
+        FoodBasket foodBasket = baskets.get(position);
         FoodBasketAdapter.ViewHolderFoodBasket viewHolderFoodBasket = (FoodBasketAdapter.ViewHolderFoodBasket) holder;
-        viewHolderFoodBasket.nameFood.setText(foodBasket.getName());
-        viewHolderFoodBasket.qty.setText(foodBasket.getQuantity());
-        viewHolderFoodBasket.priceFood.setText(foodBasket.getPrice());
+        System.out.println("foodname");
+        System.out.println(foodBasket.getName());
+        viewHolderFoodBasket.nameFood.setText(foodBasket.getName()+"");
+        viewHolderFoodBasket.priceFood.setText(foodBasket.getPrice()+"");
+        viewHolderFoodBasket.qty.setText(foodBasket.getQuantity()+"");
+
         int qty = foodBasket.getQuantity();
         int price = foodBasket.getPrice();
         int priceFood = qty * price;
-        viewHolderFoodBasket.intoMoney.setText(priceFood);
+        viewHolderFoodBasket.intoMoney.setText(priceFood + " ");
+        System.out.println(priceFood);
+
+//        viewHolderFoodBasket.intoMoney.setText(priceFood);
     }
 
     @Override
     public int getItemCount() {
-        return foodBaskets.size();
+        return baskets.size();
     }
 }

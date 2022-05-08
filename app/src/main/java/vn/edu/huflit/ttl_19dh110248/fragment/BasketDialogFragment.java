@@ -16,23 +16,22 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.concurrent.ExecutionException;
+import java.util.ArrayList;
 
-import vn.edu.huflit.ttl_19dh110248.App;
 import vn.edu.huflit.ttl_19dh110248.OrderActivity;
 import vn.edu.huflit.ttl_19dh110248.R;
 import vn.edu.huflit.ttl_19dh110248.RestaurantDetailActivity;
 import vn.edu.huflit.ttl_19dh110248.adapter.FoodBasketAdapter;
 import vn.edu.huflit.ttl_19dh110248.models.Basket;
-import vn.edu.huflit.ttl_19dh110248.models.CartRepository;
+import vn.edu.huflit.ttl_19dh110248.models.FoodBasket;
 
 public class BasketDialogFragment extends DialogFragment implements  View.OnClickListener {
     public TextView tvTotal;
     public RecyclerView rvFoods;
     public Basket basket;
-    public FoodBasketAdapter adapter;
+    public  FoodBasketAdapter adapter;
     public Button btnPlaceOrder;
-    public App app;
+
 
 
     public BasketDialogFragment() {
@@ -55,12 +54,8 @@ public class BasketDialogFragment extends DialogFragment implements  View.OnClic
         tvTotal = view.findViewById(R.id.tvTotal);
         tvTotal.setText(basket.getTotalPrice()+"");
         rvFoods = view.findViewById(R.id.rvFoods);
-        CartRepository cartRepository = new CartRepository(app);
-        try {
-            System.out.println(cartRepository.getAllCarts());
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
+        // dang fix
+        adapter = new FoodBasketAdapter(new ArrayList<FoodBasket>(basket.foods.values()));
         rvFoods.setAdapter(adapter);
         rvFoods.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
         btnPlaceOrder = view.findViewById(R.id.btnPlaceOrder);
@@ -80,7 +75,6 @@ public class BasketDialogFragment extends DialogFragment implements  View.OnClic
 
     @Override
     public void onClick(View v) {
-
         if (v.getId() == R.id.btnPlaceOrder) {
             if (basket.getTotalItem() > 0) {
                 Intent intent = new Intent(getContext(), OrderActivity.class);

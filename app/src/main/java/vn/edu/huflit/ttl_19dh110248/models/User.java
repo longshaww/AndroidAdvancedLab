@@ -1,13 +1,15 @@
 package vn.edu.huflit.ttl_19dh110248.models;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     String email;
     String firstname;
     String lastname;
     String phone;
     String address;
     String userID;
-    double lattitude, longitude;
+    double latitude, longitude;
 
     public User(){}
     public String getEmail() {
@@ -58,12 +60,12 @@ public class User {
         this.userID = userID;
     }
 
-    public double getLattitude() {
-        return lattitude;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setLattitude(double lattitude) {
-        this.lattitude = lattitude;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public double getLongitude() {
@@ -74,14 +76,14 @@ public class User {
         this.longitude = longitude;
     }
 
-    public User(String email, String firstname, String lastname, String phone, String address, String userID,double lattitude,double longitude) {
+    public User(String email, String firstname, String lastname, String phone, String address, String userID,double latitude,double longitude) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
         this.address = address;
         this.userID = userID;
-        this.lattitude = lattitude;
+        this.latitude = latitude;
         this.longitude = longitude;
     }
 }

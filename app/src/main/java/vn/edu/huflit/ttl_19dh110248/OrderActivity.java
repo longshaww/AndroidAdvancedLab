@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -58,6 +59,10 @@ public class OrderActivity extends AppCompatActivity implements OnMapReadyCallba
         setContentView(R.layout.activity_order);
 
 
+        SupportMapFragment mapFragment
+                = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.frgMaps);
+        mapFragment.getMapAsync(this);
+
         tvAddress = findViewById(R.id.tvAddress);
         tvName = findViewById(R.id.tvName);
 
@@ -70,14 +75,17 @@ public class OrderActivity extends AppCompatActivity implements OnMapReadyCallba
                 .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
                     public void onSuccess(DataSnapshot dataSnapshot) {
-                        vn.edu.huflit.ttl_19dh110248.models.User user = dataSnapshot.getValue(User.class);
-                        LatLng latLngUser = new LatLng(user.getLattitude(), user.getLongitude());
+                        User user = dataSnapshot.getValue(User.class);
+                        LatLng latLngUser = new LatLng(user.getLatitude(), user.getLongitude());
                         MarkerOptions options = new MarkerOptions().position(latLngUser);
                         options.icon(BitmapDescriptorFactory.fromBitmap(
                                 BitmapFactory.decodeResource(getResources(), R.drawable.ic_marker)));
 
                         map.addMarker(options);
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngUser, 16));
+
+
+
                         tvName.setText("Name: " + user.getFirstName() + " " + user.getLastName());
                         tvAddress.setText("Address: " + user.getEmail());
 
@@ -90,9 +98,6 @@ public class OrderActivity extends AppCompatActivity implements OnMapReadyCallba
                     }
                 });
 
-//        SupportMapFragment mapFragment
-//                = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.frgMaps);
-//        mapFragment.getMapAsync(this);
 
         cartRepository = new CartRepository(getApplication());
 
@@ -130,7 +135,7 @@ public class OrderActivity extends AppCompatActivity implements OnMapReadyCallba
         tvTotal = findViewById(R.id.tvTotal);
         tvTotal.setText(basket.getTotalPrice()+"");
         rvFoods = findViewById(R.id.rvFoods);
-//        adapter = new FoodBasketAdapter(new ArrayList<>(basket.foods.values()));
+        adapter = new FoodBasketAdapter(new ArrayList<>(basket.foods.values()));
         rvFoods.setAdapter(adapter);
         rvFoods.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
