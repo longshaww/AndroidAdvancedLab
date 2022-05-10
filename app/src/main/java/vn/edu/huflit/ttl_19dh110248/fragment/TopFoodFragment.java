@@ -30,7 +30,7 @@ import vn.edu.huflit.ttl_19dh110248.models.Food;
  * Use the {@link TopFoodFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TopFoodFragment extends Fragment implements FoodAdapter.OnFoodItemClickListener{
+public class TopFoodFragment extends Fragment implements FoodAdapter.OnFoodItemClickListener {
     RecyclerView rvFood;
     FoodAdapter foodAdapter;
     ArrayList<Food> foods;
@@ -81,7 +81,7 @@ public class TopFoodFragment extends Fragment implements FoodAdapter.OnFoodItemC
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvFood = view.findViewById(R.id.rvFood);
-        foodAdapter = new FoodAdapter(foods,this);
+        foodAdapter = new FoodAdapter(foods, this);
         rvFood.setAdapter(foodAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rvFood.setLayoutManager(layoutManager);
@@ -108,7 +108,7 @@ public class TopFoodFragment extends Fragment implements FoodAdapter.OnFoodItemC
     }
 
 
-            @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment

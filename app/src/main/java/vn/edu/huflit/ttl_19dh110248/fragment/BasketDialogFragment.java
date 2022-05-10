@@ -23,16 +23,13 @@ import vn.edu.huflit.ttl_19dh110248.R;
 import vn.edu.huflit.ttl_19dh110248.RestaurantDetailActivity;
 import vn.edu.huflit.ttl_19dh110248.adapter.FoodBasketAdapter;
 import vn.edu.huflit.ttl_19dh110248.models.Basket;
-import vn.edu.huflit.ttl_19dh110248.models.FoodBasket;
 
-public class BasketDialogFragment extends DialogFragment implements  View.OnClickListener {
+public class BasketDialogFragment extends DialogFragment implements View.OnClickListener {
     public TextView tvTotal;
     public RecyclerView rvFoods;
     public Basket basket;
-    public  FoodBasketAdapter adapter;
+    public FoodBasketAdapter adapter;
     public Button btnPlaceOrder;
-
-
 
     public BasketDialogFragment() {
     }
@@ -52,16 +49,14 @@ public class BasketDialogFragment extends DialogFragment implements  View.OnClic
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tvTotal = view.findViewById(R.id.tvTotal);
-        tvTotal.setText(basket.getTotalPrice()+"");
+        tvTotal.setText(basket.getTotalPrice() + "");
         rvFoods = view.findViewById(R.id.rvFoods);
-        // dang fix
-        adapter = new FoodBasketAdapter(new ArrayList<FoodBasket>(basket.foods.values()));
+        adapter = new FoodBasketAdapter(new ArrayList<>(basket.foods.values()));
         rvFoods.setAdapter(adapter);
-        rvFoods.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
+        rvFoods.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         btnPlaceOrder = view.findViewById(R.id.btnPlaceOrder);
-        btnPlaceOrder.setOnClickListener(this);
-
-
+        btnPlaceOrder.setOnClickListener(this)
+        ;
     }
 
     @Override
@@ -70,7 +65,6 @@ public class BasketDialogFragment extends DialogFragment implements  View.OnClic
         getDialog().setCancelable(true);
         super.onResume();
     }
-
 
 
     @Override
@@ -86,11 +80,7 @@ public class BasketDialogFragment extends DialogFragment implements  View.OnClic
                 getDialog().dismiss();
             }
         }
-
-
         int id = v.getId();
-
-
     }
 
 

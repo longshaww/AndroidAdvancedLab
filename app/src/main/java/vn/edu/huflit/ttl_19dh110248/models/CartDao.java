@@ -31,6 +31,10 @@ public interface CartDao {
     @Query("DELETE FROM Cart")
     void delete();
 
+    @Query("UPDATE Cart SET quantity = :qty WHERE foodKey = :foodKey")
+    void updateQty(String foodKey,int qty);
 
+    @Query("SELECT * FROM Cart WHERE foodKey = :foodKey")
+    Cart findByID(String foodKey);
 }
 

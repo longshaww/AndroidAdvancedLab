@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         //Hooks
         logo=findViewById(R.id.logoApp);
         logo.setAnimation(logoAnim);
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

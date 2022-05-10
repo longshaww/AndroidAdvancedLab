@@ -15,6 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.concurrent.ExecutionException;
+
 import vn.edu.huflit.ttl_19dh110248.App;
 import vn.edu.huflit.ttl_19dh110248.R;
 import vn.edu.huflit.ttl_19dh110248.RestaurantDetailActivity;
@@ -97,7 +99,13 @@ public class AddToBasketDialogFragment extends DialogFragment implements View.On
                     app.basket.addFood(food);
                 }
                 ((RestaurantDetailActivity) getActivity()).updateBasket();
-                cartRepository.insert(new Cart(food.getFoodKey(), food.getName(), food.getPrice(), food.getImage(),food.getRate(),food.getResKey(), food.getQuantity(), food.getSum()));
+                try {
+                    cartRepository.insert(new Cart(food.getFoodKey(), food.getName(), food.getPrice(), food.getImage(),food.getRate(),food.getResKey(), food.getQuantity(), food.getSum()));
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
                 getDialog().dismiss();
                 break;

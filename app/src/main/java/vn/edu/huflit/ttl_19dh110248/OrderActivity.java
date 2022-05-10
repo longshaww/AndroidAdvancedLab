@@ -85,7 +85,6 @@ public class OrderActivity extends AppCompatActivity implements OnMapReadyCallba
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngUser, 16));
 
 
-
                         tvName.setText("Name: " + user.getFirstName() + " " + user.getLastName());
                         tvAddress.setText("Address: " + user.getEmail());
 
@@ -104,14 +103,14 @@ public class OrderActivity extends AppCompatActivity implements OnMapReadyCallba
 
         Intent intent = getIntent();
 
-        if( intent.getSerializableExtra("basket") != null ){
+        if (intent.getSerializableExtra("basket") != null) {
             basket = (Basket) intent.getSerializableExtra("basket");
-        }else {
+        } else {
             try {
 
                 basket = new Basket();
                 List<Cart> carts = cartRepository.getAllCarts();
-                for (Cart cart : carts){
+                for (Cart cart : carts) {
                     basket.addFood(new FoodBasket(new Food(cart.getFoodName(),
                             cart.getFoodImage(),
                             cart.getFoodPrice(),
@@ -133,11 +132,11 @@ public class OrderActivity extends AppCompatActivity implements OnMapReadyCallba
 
 
         tvTotal = findViewById(R.id.tvTotal);
-        tvTotal.setText(basket.getTotalPrice()+"");
+        tvTotal.setText(basket.getTotalPrice() + "");
         rvFoods = findViewById(R.id.rvFoods);
         adapter = new FoodBasketAdapter(new ArrayList<>(basket.foods.values()));
         rvFoods.setAdapter(adapter);
-        rvFoods.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+        rvFoods.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
 
         btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
@@ -165,9 +164,7 @@ public class OrderActivity extends AppCompatActivity implements OnMapReadyCallba
                             }
                         });
 
-
                 finish();
-
             }
         });
     }
