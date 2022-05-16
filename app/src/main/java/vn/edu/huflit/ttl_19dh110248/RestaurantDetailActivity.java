@@ -160,7 +160,6 @@ public class RestaurantDetailActivity extends AppCompatActivity implements FoodA
     public void updateBasket() {
         app.basket.calculateBasket();
         tvTotalPrices.setText(app.basket.getTotalPrice());
-        tvTotalItems.setText(app.basket.getTotalItem() + "");
-
+        tvTotalItems.setText(app.basket.foods.size() + "");
     }
 }
